@@ -31,6 +31,11 @@ module LatPhysReciprocal
 
 
 
+# RECIPROCAL POINTS
+
+# abstract type definition
+include("reciprocal_points/abstract_rec_point.jl")
+
 
 
 # module end
