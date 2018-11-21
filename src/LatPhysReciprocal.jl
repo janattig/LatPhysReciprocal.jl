@@ -29,6 +29,17 @@
 # module start
 module LatPhysReciprocal
 
+# used libraries
+using LatPhysBase
+
+# imports (to overwrite functions)
+import LatPhysBase.label
+import LatPhysBase.label!
+import LatPhysBase.point
+import LatPhysBase.point!
+import LatPhysBase.similar
+import Base.show
+
 
 
 # RECIPROCAL POINTS
