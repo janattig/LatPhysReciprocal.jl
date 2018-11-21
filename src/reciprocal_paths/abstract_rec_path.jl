@@ -86,6 +86,7 @@ export points, points!
 # some more beauty interface
 # builds on interface defined above but can also be overwritten
 
+
 # number of reciprocal points
 function numPoints(
             p :: RPA
@@ -97,8 +98,6 @@ end
 
 # export the function
 export numPoints
-
-
 
 
 # access a specific reciprocal point
