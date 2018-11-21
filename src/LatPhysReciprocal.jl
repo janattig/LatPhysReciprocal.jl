@@ -46,6 +46,8 @@ import Base.show
 
 # abstract type definition
 include("reciprocal_points/abstract_rec_point.jl")
+# concrete type definition
+include("reciprocal_points/concrete_rec_point.jl")
 
 
 
