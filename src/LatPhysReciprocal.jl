@@ -49,6 +49,9 @@ include("reciprocal_points/abstract_rec_point.jl")
 # concrete type definition
 include("reciprocal_points/concrete_rec_point.jl")
 
+# Default definitions of various points
+include("reciprocal_points/default_points.jl")
+
 
 
 # module end
