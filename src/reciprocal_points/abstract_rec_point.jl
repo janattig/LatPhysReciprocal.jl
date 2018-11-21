@@ -194,5 +194,5 @@ export newReciprocalPoint
 #
 ################################################################################
 function show(io::IO, p::R) where {R<:AbstractReciprocalPoint{D} where D}
-    print(io, R, " @", point(p), ": (", label(p), " / ", labelLaTeX(p), ")")
+    print(io, R, " @", point(p), ": (\"", label(p), "\" / L\"", labelLaTeX(p), "\")")
 end
