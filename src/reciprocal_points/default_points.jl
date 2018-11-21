@@ -36,7 +36,7 @@ function getReciprocalPoint(
             unitcell   :: U,
             identifier :: Val{I1},
             instance   :: Val{I2}
-        ) :: R where {I1,I2,D,N,LS,LB, R<:AbstractReciprocalPoint{D}, S<:AbstractSite{LS,D}, B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B},V}
+        ) :: R where {I1,I2,D,N,LS,LB, R<:AbstractReciprocalPoint{D}, S<:AbstractSite{LS,D}, B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B}}
 
     # fallback / fail due to missing implementation
     error("Implementation of reciprocal point " * string(I1) * " (instance " * string(I2) * ") not implemented yet " *
@@ -46,3 +46,69 @@ end
 
 # export the general interface function
 export getReciprocalPoint
+
+
+
+
+
+################################################################################
+#
+#	IMPLEMENTATIONS OF DEFAULT POINTS IN RECIPROCAL SPACE
+#
+################################################################################
+
+
+
+
+#########################
+#
+#	GAMMA POINT
+#
+#########################
+
+# Gamma point in arbitrary dimension (Fallback)
+function getReciprocalPoint(
+            :: Type{R},
+            unitcell   :: U,
+            identifier :: Val{:Gamma},
+            instance   :: Val{I}
+        ) :: R where {I,D,N,LS,LB, R<:AbstractReciprocalPoint{D}, S<:AbstractSite{LS,D}, B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B}}
+
+    # fallback / fail due to missing implementation
+    error("Implementation of Gamma point in " * string(D) * " spatial dimensions missing " *
+    "for concrete reciprocal point type " * string(R))
+end
+
+# Gamma point in 2D
+function getReciprocalPoint(
+            :: Type{R},
+            unitcell   :: U,
+            identifier :: Val{:Gamma},
+            instance   :: Val{I}
+        ) :: R where {I,N,LS,LB, R<:AbstractReciprocalPoint{2}, S<:AbstractSite{LS,2}, B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B}}
+
+    # return the specific type
+    return newReciprocalPoint(
+        R,
+        [0.0, 0.0],
+        "Gamma",
+        "\\Gamma"
+    )
+end
+
+# Gamma point in 3D
+function getReciprocalPoint(
+            :: Type{R},
+            unitcell   :: U,
+            identifier :: Val{:Gamma},
+            instance   :: Val{I}
+        ) :: R where {I,N,LS,LB, R<:AbstractReciprocalPoint{3}, S<:AbstractSite{LS,3}, B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B}}
+
+    # return the specific type
+    return newReciprocalPoint(
+        R,
+        [0.0, 0.0, 0.0],
+        "Gamma",
+        "\\Gamma"
+    )
+end
