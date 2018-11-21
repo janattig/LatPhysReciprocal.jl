@@ -29,6 +29,9 @@
 # module start
 module LatPhysReciprocal
 
+
+
+
 # used libraries
 using LatPhysBase
 
@@ -42,6 +45,7 @@ import Base.show
 
 
 
+
 # RECIPROCAL POINTS
 
 # abstract type definition
@@ -51,6 +55,17 @@ include("reciprocal_points/concrete_rec_point.jl")
 
 # Default definitions of various points
 include("reciprocal_points/default_points.jl")
+
+
+
+
+# RECIPROCAL PATHS
+
+# abstract type definition
+include("reciprocal_paths/abstract_rec_path.jl")
+# concrete type definition
+include("reciprocal_paths/concrete_rec_path.jl")
+
 
 
 
