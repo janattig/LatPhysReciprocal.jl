@@ -171,7 +171,7 @@ end
 function getReciprocalPath(
             unitcell :: U,
             points :: Symbol ...
-        ) :: RPA where {LS,D,S<:AbstractSite{LS,D},B,U<:AbstractUnitcell{S,B}}
+        ) :: ReciprocalPath{ReciprocalPoint{D}} where {LS,D,S<:AbstractSite{LS,D},B,U<:AbstractUnitcell{S,B}}
 
     # pass to the specific function
     return newReciprocalPath(ReciprocalPath{ReciprocalPoint{D}}, [getReciprocalPoint(ReciprocalPoint{D}, unitcell, p) for p in points])
