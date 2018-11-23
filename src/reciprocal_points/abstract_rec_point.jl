@@ -53,8 +53,9 @@ end
 export newReciprocalPoint
 
 
+
 # interface of AbstractSite
-# so it DOES NOT HAVE TO BE OVERWRITTEN by concrete rec point
+# so it DOES NOT HAVE TO BE OVERWRITTEN by concrete recipocal point
 function newSite(
             :: Type{R},
             point   :: Vector{<:Real},
@@ -67,6 +68,9 @@ end
 
 # export the newSite interface
 export newSite
+
+
+
 
 
 
