@@ -22,7 +22,7 @@
 #   ABSTRACT TYPE DEFINITION
 #
 ################################################################################
-abstract type AbstractReciprocalPoint{D} end
+abstract type AbstractReciprocalPoint{D} <: AbstractSite{String, D} end
 
 # export the type
 export AbstractReciprocalPoint
@@ -51,6 +51,23 @@ end
 
 # export the newSite interface
 export newReciprocalPoint
+
+
+# interface of AbstractSite
+# so it DOES NOT HAVE TO BE OVERWRITTEN by concrete rec point
+function newSite(
+            :: Type{R},
+            point   :: Vector{<:Real},
+            label   :: AbstractString
+        ) :: R where {D, R <: AbstractReciprocalPoint{D}}
+
+    # return the respective function
+    return newReciprocalPoint(R, point, label)
+end
+
+# export the newSite interface
+export newSite
+
 
 
 

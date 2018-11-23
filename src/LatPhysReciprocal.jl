@@ -40,6 +40,7 @@ import LatPhysBase.label
 import LatPhysBase.label!
 import LatPhysBase.point
 import LatPhysBase.point!
+import LatPhysBase.newSite
 import LatPhysBase.similar
 import Base.show
 
