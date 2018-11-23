@@ -168,3 +168,6 @@ function getReciprocalPath(
     # pass to the specific function
     return newReciprocalPath(RPA, [getReciprocalPoint(RPO, unitcell, p) for p in points])
 end
+
+# export the reciprocal path
+export getReciprocalPath
