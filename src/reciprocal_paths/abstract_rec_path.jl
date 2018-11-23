@@ -158,7 +158,7 @@ end
 #
 ################################################################################
 
-# BY PASSED POINTS
+# CONSTRUCT A PATH BY PASSED POINTS (as Symbols)
 function getReciprocalPath(
             ::Type{RPA},
             unitcell :: U,
@@ -167,6 +167,14 @@ function getReciprocalPath(
 
     # pass to the specific function
     return newReciprocalPath(RPA, [getReciprocalPoint(RPO, unitcell, p) for p in points])
+end
+function getReciprocalPath(
+            unitcell :: U,
+            points :: Symbol ...
+        ) :: RPA where {LS,D,S<:AbstractSite{LS,D},B,U<:AbstractUnitcell{S,B}}
+
+    # pass to the specific function
+    return newReciprocalPath(ReciprocalPath{ReciprocalPoint{D}}, [getReciprocalPoint(ReciprocalPoint{D}, unitcell, p) for p in points])
 end
 
 # export the reciprocal path
