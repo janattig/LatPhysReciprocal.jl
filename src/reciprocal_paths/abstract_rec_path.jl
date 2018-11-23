@@ -137,3 +137,34 @@ function points!(
     # return the fitting function
     return points!(p, RPO[p for p in points])
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+################################################################################
+#
+#	INTERFACING FOR BUILDING RECIPROCAL PATHS
+#
+################################################################################
+
+# BY PASSED POINTS
+function getReciprocalPath(
+            ::Type{RPA},
+            unitcell :: U,
+            points :: Symbol ...
+        ) :: RPA where {D,RPO<:AbstractReciprocalPoint{D}, RPA<:AbstractReciprocalPath{RPO},S,B,U<:AbstractUnitcell{S,B}}
+
+    # pass to the specific function
+    return newReciprocalPath(RPA, [getReciprocalPoint(RPO, unitcell, p) for p in points])
+end
