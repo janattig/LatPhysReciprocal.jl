@@ -40,7 +40,7 @@ function getReciprocalPoint(
 
     # fallback / fail due to missing implementation
     error("Implementation of reciprocal point " * string(I1) * " (instance " * string(I2) * ") not implemented yet " *
-    "for concrete reciprocal point type " * string(R))
+    "for concrete reciprocal point type " * string(R) * " and unitcells of dimension D=" * string(D) * " and N="*string(N))
 end
 
 
