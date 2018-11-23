@@ -190,7 +190,6 @@ export newReciprocalPoint
 ################################################################################
 #
 #	OVERWRITING BASE.SHOW FOR RECIPROCAL POINTS
-#	(functions have to be overwritten by concrete types)
 #
 ################################################################################
 function show(io::IO, p::R) where {R<:AbstractReciprocalPoint{D} where D}

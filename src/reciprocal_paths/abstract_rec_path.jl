@@ -143,6 +143,20 @@ end
 
 
 
+################################################################################
+#
+#	OVERWRITING BASE.SHOW FOR RECIPROCAL PATHS
+#
+################################################################################
+function show(io::IO, p::RPA) where {D, RPO<:AbstractReciprocalPoint{D}, RPA<:AbstractReciprocalPath{RPO}}
+    print(io, "Reciprocal Path of type ", string(RPA), " including ", numPoints(p), " points.\n")
+    print(io, "1) ", point(p,1))
+    for i in 2:numPoints(p)
+        print("\n    |\n")
+        print(io, i, ") ", point(p,i))
+    end
+end
+
 
 
 
