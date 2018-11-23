@@ -70,5 +70,21 @@ include("reciprocal_paths/concrete_rec_path.jl")
 
 
 
+
+# RECIPROCAL LATTICE / UNITCELL / BRILLOUIN ZONE
+
+# abstract type definition (unitcell)
+include("reciprocal_lattice/abstract_reciprocal_unitcell.jl")
+# concrete type definition (unitcell)
+include("reciprocal_lattice/concrete_reciprocal_unitcell.jl")
+
+# abstract type definition (Brillouin zone)
+include("reciprocal_lattice/abstract_brillouin_zone.jl")
+# concrete type definition (Brillouin zone)
+include("reciprocal_lattice/concrete_brillouin_zone.jl")
+
+
+
+
 # module end
 end
