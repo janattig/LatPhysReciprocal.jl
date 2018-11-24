@@ -90,6 +90,8 @@ include("reciprocal_lattice/abstract_brillouin_zone.jl")
 # concrete type definition (Brillouin zone)
 include("reciprocal_lattice/concrete_brillouin_zone.jl")
 
+# structure tools
+include("reciprocal_lattice/reciprocal_lattice_structure_tools.jl")
 
 
 
