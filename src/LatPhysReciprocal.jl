@@ -34,6 +34,7 @@ module LatPhysReciprocal
 
 # used libraries
 using LatPhysBase
+using LinearAlgebra
 
 # imports (to overwrite functions)
 import LatPhysBase.label
