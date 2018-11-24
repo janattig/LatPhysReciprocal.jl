@@ -65,7 +65,31 @@ export newUnitcell
 
 
 
+# accessing a list of sites
+function sites(
+            unitcell :: U
+        ) :: Vector{S} where {D,N,LS,LB,S<:AbstractSite{LS,D},B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B}}
 
+    # return the Gamma point
+    return gammaPoint(unitcell)
+end
+# setting a list of sites
+function sites!(
+            unitcell :: U,
+            sites    :: Vector{S}
+        ) where {D,N,L,S<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{S,B}}
+
+    # check if only a single site is given
+    @assert length(sites) == 1
+    # check if the site is located at 0
+    @assert sum(abs.(point(sites[1]))) < 1e-8
+
+    # set the Gamma point
+    gammaPoint!(unitcell)
+end
+
+# export the sites interface
+export sites, sites!
 
 
 
@@ -87,3 +111,57 @@ function newReciprocalUnitcell(
     error(  "not implemented function 'newReciprocalUnitcell' for concrete reciprocal unitcell type " *
             string(R) * " with bond type " * string(B) )
 end
+
+# export the constructor
+export newReciprocalUnitcell
+
+
+
+
+# accessing a list of lattice vectors
+function latticeVectors(
+            unitcell :: U
+        ) :: Vector{Vector{Float64}} where {P,B,U<:AbstractReciprocalUnitcell{P,B}}
+
+    # print an error because implementation for concrete type is missing
+    error(  "not implemented function 'latticeVectors' for concrete reciprocal unitcell type " * string(U) )
+end
+# setting a list of lattice vectors
+function latticeVectors!(
+            unitcell        :: U,
+            lattice_vectors :: Vector{<:Vector{<:Real}}
+        ) where {P,B,U<:AbstractReciprocalUnitcell{P,B}}
+
+    # print an error because implementation for concrete type is missing
+    error(  "not implemented function 'latticeVectors!' for concrete reciprocal unitcell type " * string(U) )
+end
+
+# export the latticeVectors interface
+export latticeVectors, latticeVectors!
+
+
+
+
+
+# accessing a list of bonds
+function bonds(
+            unitcell :: U
+        ) :: Vector{B} where {N,L,P,B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{P,B}}
+
+    # print an error because implementation for concrete type is missing
+    error(  "not implemented function 'bonds' for concrete reciprocal unitcell type " *
+            string(U) * " with bond type " * string(B)   )
+end
+# setting a list of bonds
+function bonds!(
+            unitcell :: U,
+            bonds    :: Vector{B}
+        ) where {N,L,P,B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{P,B}}
+
+    # print an error because implementation for concrete type is missing
+    error(  "not implemented function 'bonds!' for concrete reciprocal unitcell type " *
+            string(U) * " with bond type " * string(B)   )
+end
+
+# export the bonds interface
+export bonds, bonds!

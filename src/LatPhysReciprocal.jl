@@ -42,6 +42,13 @@ import LatPhysBase.point
 import LatPhysBase.point!
 import LatPhysBase.newSite
 import LatPhysBase.similar
+import LatPhysBase.newUnitcell
+import LatPhysBase.sites
+import LatPhysBase.sites!
+import LatPhysBase.bonds
+import LatPhysBase.bonds!
+import LatPhysBase.latticeVectors
+import LatPhysBase.latticeVectors!
 import Base.show
 
 
