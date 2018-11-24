@@ -85,7 +85,7 @@ function sites!(
     @assert sum(abs.(point(sites[1]))) < 1e-8
 
     # set the Gamma point
-    gammaPoint!(unitcell)
+    gammaPoint!(unitcell, sites[1])
 end
 
 # export the sites interface
@@ -140,6 +140,29 @@ end
 export latticeVectors, latticeVectors!
 
 
+
+
+# accessing the gamma point
+function gammaPoint(
+            unitcell :: U
+        ) :: Vector{S} where {D,N,L,S<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{S,B}}
+
+    # print an error because implementation for concrete type is missing
+    error(  "not implemented function 'gammaPoint' for concrete reciprocal unitcell type " * string(U) )
+end
+
+# setting the gamma point
+function gammaPoint(
+            unitcell :: U,
+            site     :: P
+        ) :: Vector{S} where {D,N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{P,B}}
+
+    # print an error because implementation for concrete type is missing
+    error(  "not implemented function 'gammaPoint!' for concrete reciprocal unitcell type " * string(U) )
+end
+
+# export gamma point interface
+export gammaPoint, gammaPoint!
 
 
 
