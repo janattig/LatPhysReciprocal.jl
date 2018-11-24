@@ -68,7 +68,7 @@ export newUnitcell
 # accessing a list of sites
 function sites(
             unitcell :: U
-        ) :: Vector{S} where {D,N,LS,LB,S<:AbstractSite{LS,D},B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B}}
+        ) :: Vector{S} where {D,N,L,S<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{S,B}}
 
     # return the Gamma point
     return gammaPoint(unitcell)
