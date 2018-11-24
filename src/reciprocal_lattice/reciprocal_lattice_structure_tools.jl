@@ -74,6 +74,9 @@ function testReciprocality(
     return overlap_sum < error_allowed ? true : false
 end
 
+# export the function
+export testReciprocality
+
 
 # TODO LIST
 # - getBrillouinZone(rec_unitcell)
