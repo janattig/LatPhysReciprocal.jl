@@ -1,8 +1,5 @@
-
-# FUNCTIONS ON THE WISHLIST
+# INTERFACE FUNCTIONS
 #
 # - corners(BZ), faces(BZ), edges(BZ)
 # - rec_unitcell(BZ)
 #
-# - getBrillouinZone(rec_unitcell)
-# - getBrillouinZoneCorners(rec_unitcell)   (... edges, faces...)
