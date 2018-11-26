@@ -30,6 +30,8 @@ end
 ###########
 #   1D    #
 ###########
+
+# N=1,D=?
 function getReciprocalUnitcell(
         ::Type{R},
         unitcell :: U
@@ -54,6 +56,7 @@ function getReciprocalUnitcell(
         ]
     )
 end
+
 
 
 ###########
@@ -120,12 +123,12 @@ function getReciprocalUnitcell(
     return newReciprocalUnitcell(
         # pass the given type
         R,
-        # pass the single lattice vector
+        # pass the two lattice vectors
         Vector{Float64}[
             latvec_b1,
             latvec_b2
         ],
-        # pass the two relevant bonds
+        # pass the 8 (3^2 - 1) relevant bonds
         BR[
             newBond(BR, 1,1, getDefaultLabel(LBR), ( 0,+1)),
             newBond(BR, 1,1, getDefaultLabel(LBR), ( 0,-1)),
@@ -139,11 +142,77 @@ function getReciprocalUnitcell(
     )
 end
 
+# N=2, D<2 not possible
+# N=2, D>3 not implemented
+
 
 
 ###########
 #   3D    #
 ###########
+
+# N=2, D=3
+function getReciprocalUnitcell(
+        ::Type{R},
+        unitcell :: U
+    ) :: R where {LS,LB,S<:AbstractSite{LS,3},B<:AbstractBond{LB,1},U<:AbstractUnitcell{S,B},
+                  LBR,BR<:AbstractBond{LBR,1},P<:AbstractReciprocalPoint{3},R<:AbstractReciprocalUnitcell{P,BR}}
+
+    # construct reciprocal lattice vectors
+    latvec_b1 = cross(a2(unitcell), a3(unitcell))
+    latvec_b2 = cross(a3(unitcell), a1(unitcell))
+    latvec_b3 = cross(a1(unitcell), a2(unitcell))
+    # normalize the vectors
+    latvec_b1 .*= 2*pi/sum(latvec_b1.*a1(unitcell))
+    latvec_b2 .*= 2*pi/sum(latvec_b2.*a2(unitcell))
+    latvec_b3 .*= 2*pi/sum(latvec_b3.*a3(unitcell))
+
+    # return a new reciprocal unitcell
+    return newReciprocalUnitcell(
+        # pass the given type
+        R,
+        # pass the three lattice vectors
+        Vector{Float64}[
+            latvec_b1,
+            latvec_b2,
+            latvec_b3
+        ],
+        # pass the 26 (3^3 - 1) relevant bonds
+        BR[
+            newBond(BR, 1,1, getDefaultLabel(LBR), ( 0, 0,+1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), ( 0, 0,-1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), ( 0,+1, 0)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), ( 0,-1, 0)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (-1, 0, 0)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (+1, 0, 0)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), ( 0,+1,+1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), ( 0,-1,+1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), ( 0,+1,-1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), ( 0,-1,-1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (+1, 0,+1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (+1, 0,-1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (-1, 0,+1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (-1, 0,-1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (+1,+1, 0)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (+1,-1, 0)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (-1,+1, 0)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (-1,-1, 0)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (+1,+1,+1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (+1,-1,+1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (+1,+1,-1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (+1,-1,-1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (-1,+1,+1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (-1,-1,+1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (-1,+1,-1)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (-1,-1,-1))
+        ]
+    )
+end
+
+# N=3, D<3 not possible
+# N=3, D>3 not implemented
+
+
 
 
 # export the function
