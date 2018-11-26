@@ -152,7 +152,7 @@ function gammaPoint(
 end
 
 # setting the gamma point
-function gammaPoint(
+function gammaPoint!(
             unitcell :: U,
             site     :: P
         ) :: Vector{S} where {D,N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{P,B}}
