@@ -26,8 +26,8 @@ function getReciprocalUnitcell(
         ],
         # pass the two relevant bonds
         BR[
-            newBond(BR, 1,1, LBR(1), (+1,)),
-            newBond(BR, 1,1, LBR(1), (-1,))
+            newBond(BR, 1,1, getDefaultLabel(LBR), (+1,)),
+            newBond(BR, 1,1, getDefaultLabel(LBR), (-1,))
         ]
     )
 end
