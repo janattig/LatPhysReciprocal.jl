@@ -1,6 +1,6 @@
 ################################################################################
 #
-#   RECIPROCAL LATTICE / UNITCELL CONSTRUCTION / TESTING
+#   RECIPROCAL LATTICE / UNITCELL CONSTRUCTION
 #
 ################################################################################
 
@@ -45,9 +45,13 @@ export getReciprocalUnitcell
 
 
 
+################################################################################
+#
+#   RECIPROCAL LATTICE / UNITCELL TESTING
+#
+################################################################################
 
-
-# TEST IF TWO UNITCELLS ARE RECIPROCAL
+# Test function
 function testReciprocality(
         uc_real :: U,
         uc_reci :: R,
