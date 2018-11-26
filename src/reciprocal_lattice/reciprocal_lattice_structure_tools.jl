@@ -67,8 +67,8 @@ end
 function getReciprocalUnitcell(
         ::Type{R},
         unitcell :: U
-    ) :: R where {LS,LB,S<:AbstractSite{LS,2},B<:AbstractBond{LB,1},U<:AbstractUnitcell{S,B},
-                  LBR,BR<:AbstractBond{LBR,1},P<:AbstractReciprocalPoint{2},R<:AbstractReciprocalUnitcell{P,BR}}
+    ) :: R where {LS,LB,S<:AbstractSite{LS,2},B<:AbstractBond{LB,2},U<:AbstractUnitcell{S,B},
+                  LBR,BR<:AbstractBond{LBR,2},P<:AbstractReciprocalPoint{2},R<:AbstractReciprocalUnitcell{P,BR}}
 
     # build reciprocal lattice vectors
     latvec_b1 = [a2(unitcell)[2], -a2(unitcell)[1]]
@@ -105,8 +105,8 @@ end
 function getReciprocalUnitcell(
         ::Type{R},
         unitcell :: U
-    ) :: R where {LS,LB,S<:AbstractSite{LS,3},B<:AbstractBond{LB,1},U<:AbstractUnitcell{S,B},
-                  LBR,BR<:AbstractBond{LBR,1},P<:AbstractReciprocalPoint{3},R<:AbstractReciprocalUnitcell{P,BR}}
+    ) :: R where {LS,LB,S<:AbstractSite{LS,3},B<:AbstractBond{LB,2},U<:AbstractUnitcell{S,B},
+                  LBR,BR<:AbstractBond{LBR,2},P<:AbstractReciprocalPoint{3},R<:AbstractReciprocalUnitcell{P,BR}}
 
     # build a orthogonal vector
     ortho = cross(a1(unitcell), a2(unitcell))
@@ -155,8 +155,8 @@ end
 function getReciprocalUnitcell(
         ::Type{R},
         unitcell :: U
-    ) :: R where {LS,LB,S<:AbstractSite{LS,3},B<:AbstractBond{LB,1},U<:AbstractUnitcell{S,B},
-                  LBR,BR<:AbstractBond{LBR,1},P<:AbstractReciprocalPoint{3},R<:AbstractReciprocalUnitcell{P,BR}}
+    ) :: R where {LS,LB,S<:AbstractSite{LS,3},B<:AbstractBond{LB,3},U<:AbstractUnitcell{S,B},
+                  LBR,BR<:AbstractBond{LBR,3},P<:AbstractReciprocalPoint{3},R<:AbstractReciprocalUnitcell{P,BR}}
 
     # construct reciprocal lattice vectors
     latvec_b1 = cross(a2(unitcell), a3(unitcell))
