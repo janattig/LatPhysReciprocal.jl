@@ -4,7 +4,28 @@
 #
 ################################################################################
 
-# CONSTRUCT THE RECIPROCAL UNITCELL FROM A UNITCELL
+############
+# FALLBACK #
+############
+
+# N=?,D=?
+function getReciprocalUnitcell(
+        ::Type{R},
+        unitcell :: U
+    ) :: R where {D,N,LS,LB,S<:AbstractSite{LS,D},B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B},
+                  LBR,BR<:AbstractBond{LBR,N},P<:AbstractReciprocalPoint{D},R<:AbstractReciprocalUnitcell{P,BR}}
+
+    # give an error
+    error("Cannot build a reciprocal unitcell for realspace lattice dimensions D=" * string(D) * " and N=" * string(N) * ".")
+end
+
+###########
+# WRAPPER #
+###########
+
+
+
+
 
 ###########
 #   1D    #
@@ -38,17 +59,6 @@ end
 ###########
 #   2D    #
 ###########
-
-# N=2, D<2 or D>3 (FALLBACK)
-function getReciprocalUnitcell(
-        ::Type{R},
-        unitcell :: U
-    ) :: R where {D,LS,LB,S<:AbstractSite{LS,D},B<:AbstractBond{LB,2},U<:AbstractUnitcell{S,B},
-                  LBR,BR<:AbstractBond{LBR,2},P<:AbstractReciprocalPoint{D},R<:AbstractReciprocalUnitcell{P,BR}}
-
-    # give an error
-    error("Cannot build a reciprocal unitcell for realspace lattice dimensions D=" * string(D) * " and N=2.")
-end
 
 # N=2, D=2
 function getReciprocalUnitcell(
@@ -131,7 +141,9 @@ end
 
 
 
-# 3d
+###########
+#   3D    #
+###########
 
 
 # export the function
