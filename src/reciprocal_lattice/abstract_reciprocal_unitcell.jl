@@ -145,7 +145,7 @@ export latticeVectors, latticeVectors!
 # accessing the gamma point
 function gammaPoint(
             unitcell :: U
-        ) :: S where {D,N,L,S<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{S,B}}
+        ) :: P where {D,N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{P,B}}
 
     # print an error because implementation for concrete type is missing
     error(  "not implemented function 'gammaPoint' for concrete reciprocal unitcell type " * string(U) )
@@ -155,7 +155,7 @@ end
 function gammaPoint!(
             unitcell :: U,
             site     :: P
-        ) :: S where {D,N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{P,B}}
+        ) :: P where {D,N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{P,B}}
 
     # print an error because implementation for concrete type is missing
     error(  "not implemented function 'gammaPoint!' for concrete reciprocal unitcell type " * string(U) )
