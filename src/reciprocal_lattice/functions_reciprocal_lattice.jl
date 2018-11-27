@@ -323,8 +323,8 @@ function isInFirstBZ(
         pos_neighbor = Float64[
             sum([latticeVectors(reci_unitcell)[j][i] * wrap(b)[j] for j in 1:N])  for i in 1:D
         ]
-        # substract the k point given
-        pos_neighbor .-= k
+        # add the k point given
+        pos_neighbor .+= k
         # check the minimum squared distance
         min_distance_squared = min(min_distance_squared, dot(pos_neighbor, pos_neighbor))
     end
@@ -336,3 +336,59 @@ end
 
 # export the test
 export isInFirstBZ
+
+
+
+
+# SHIFTING TO 1st BZ
+function shiftToFirstBZ(
+            reci_unitcell :: RU,
+            k             :: Vector{<:Real}
+        ) :: Vector{Float64} where {D,N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},RU<:AbstractReciprocalUnitcell{P,B}}
+
+    # return the inplace function with a copied input
+    return shiftToFirstBZ!(reci_unitcell, deepcopy(k))
+end
+
+# SHIFTING TO 1st BZ (inplace)
+function shiftToFirstBZ!(
+            reci_unitcell :: RU,
+            k             :: Vector{<:Real}
+        ) :: Vector{Float64} where {D,N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},RU<:AbstractReciprocalUnitcell{P,B}}
+
+    # find out the current distance to gamma point
+    current_distance = dot(k,k)
+
+    # create a shifted k vector
+    k_shifted = k
+
+    # boolean indicating if the point was relocated in the last iteration
+    relocated = true
+    # try to shift as long as there is a possiblity to decrease the distance
+    while relocated
+        # assume that the point is not relocated in this iteration
+        relocated = false
+        # iterate over all neighbors and try to shift the point
+        for b in bonds(reci_unitcell)
+            # get the offset from the neighbor wrap
+            offset = Float64[
+                sum([latticeVectors(reci_unitcell)[j][i] * wrap(b)[j] for j in 1:N])  for i in 1:D
+            ]
+            # see if the distance is lowered and maybe shift
+            if dot(k_shifted .+ offset, k_shifted .+ offset) < current_distance
+                # shift the point
+                k_shifted .+= offset
+                # set the current distance correctly
+                current_distance = dot(k_shifted,k_shifted)
+                # denote as relocated
+                relocated = true
+            end
+        end
+    end
+
+    # return the final shifted lattice vector
+    return k_shifted
+end
+
+# export the test
+export shiftToFirstBZ, shiftToFirstBZ!
