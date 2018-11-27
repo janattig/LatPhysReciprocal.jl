@@ -1,5 +1,24 @@
 ################################################################################
 #
+#   COLLECTION OF FUNCTIONS FOR
+#   RECIPROCAL LATTICES / UNITCELLS
+#
+#   FILE CONTAINS
+#   - construction of reciprocal unitcells from real space unitcells
+#   - testing of reciprocality between unitcell and reciprocal unitcell
+#   - reciprocal point information, shifting to 1st BZ
+#
+################################################################################
+
+
+
+
+
+
+
+
+################################################################################
+#
 #   RECIPROCAL LATTICE / UNITCELL CONSTRUCTION
 #
 ################################################################################
@@ -232,6 +251,10 @@ export getReciprocalUnitcell
 
 
 
+
+
+
+
 ################################################################################
 #
 #   RECIPROCAL LATTICE / UNITCELL TESTING
@@ -267,3 +290,49 @@ end
 
 # export the function
 export testReciprocality
+
+
+
+
+
+
+
+
+
+
+
+################################################################################
+#
+#   RECIPROCAL POINT INFORMATION / SHIFTING TO 1st BZ
+#
+################################################################################
+
+
+# TESTING IF IN 1st BZ
+function isInFirstBZ(
+            reci_unitcell :: RU,
+            k             :: Vector{<:Real}
+        ) :: Bool where {D,N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},RU<:AbstractReciprocalUnitcell{P,B}}
+
+    # build up the minimal distance to any neighbor
+    min_distance_squared = 1e40
+
+    # iterate over all neighbors and find distance
+    for b in bonds(reci_unitcell)
+        # find out the position of the neighbor
+        pos_neighbor = Float64[
+            sum([latticeVectors(reci_unitcell)[j][i] * wrap(b)[j] for j in 1:N])  for i in 1:D
+        ]
+        # substract the k point given
+        pos_neighbor .-= k
+        # check the minimum squared distance
+        min_distance_squared = min(min_distance_squared, dot(pos_neighbor, pos_neighbor))
+    end
+
+    # return if the minimal distance to the neighbors is smaller than the distance to the origin (@[0,0,0,..])
+    return (min_distance_squared >= dot(k,k))
+
+end
+
+# export the test
+export isInFirstBZ
