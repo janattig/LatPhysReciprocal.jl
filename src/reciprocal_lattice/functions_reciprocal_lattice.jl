@@ -331,7 +331,6 @@ function isInFirstBZ(
 
     # return if the minimal distance to the neighbors is smaller than the distance to the origin (@[0,0,0,..])
     return (min_distance_squared >= dot(k,k))
-
 end
 
 # export the test
