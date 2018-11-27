@@ -1,3 +1,35 @@
-# TODO LIST
-# - getBrillouinZone(rec_unitcell)
-# - getBrillouinZoneCorners(rec_unitcell)   (... edges, faces...)
+################################################################################
+#
+#   COLLECTION OF FUNCTIONS FOR
+#   BRILLOUIN ZONES
+#
+#   FILE CONTAINS
+#   - construction of BZ parts (corners, faces, etc.)
+#   - construction of BZ objects from reciprocal unitcells
+#
+################################################################################
+
+
+
+
+
+
+
+################################################################################
+#
+#   COMPUTING BZ PARTS FROM RECIPROCAL UNITCELLS
+#
+################################################################################
+
+
+
+
+
+
+
+
+################################################################################
+#
+#   COMPUTING BRILLOUIN ZONE OBJECTS
+#
+################################################################################
