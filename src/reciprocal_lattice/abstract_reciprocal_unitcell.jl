@@ -207,7 +207,7 @@ export bonds, bonds!
 # b1
 function b1(
             unitcell :: U
-        ) :: Vector{Float64} where {N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{P,B}}
+        ) :: Vector{Float64} where {D,N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{P,B}}
 
     # return the first entry in the lattice vectors list
     return latticeVectors(unitcell)[1]
@@ -216,7 +216,7 @@ end
 # b2
 function b2(
             unitcell :: U
-        ) :: Vector{Float64} where {N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{P,B}}
+        ) :: Vector{Float64} where {D,N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{P,B}}
 
     # return the second entry in the lattice vectors list
     return latticeVectors(unitcell)[2]
@@ -225,7 +225,7 @@ end
 # b3
 function b3(
             unitcell :: U
-        ) :: Vector{Float64} where {N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{P,B}}
+        ) :: Vector{Float64} where {D,N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},U<:AbstractReciprocalUnitcell{P,B}}
 
     # return the third entry in the lattice vectors list
     return latticeVectors(unitcell)[3]
