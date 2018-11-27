@@ -16,7 +16,6 @@
 
 
 
-#=
 
 ################################################################################
 #
@@ -83,6 +82,7 @@ end
 # RECIPROCAL LATTICE (from reciprocal unitcell)
 #-------------
 
+#=
 # general for all N,D
 function computeBrillouinZoneConstructionLattice(
             reciprocal_unitcell :: RU
