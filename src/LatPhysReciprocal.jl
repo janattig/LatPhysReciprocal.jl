@@ -92,10 +92,10 @@ include("reciprocal_lattice/abstract_brillouin_zone.jl")
 include("reciprocal_lattice/concrete_brillouin_zone.jl")
 
 # construction of reciprocal lattices from real space lattices
-include("reciprocal_lattice/construction_reciprocal_lattice.jl")
+include("reciprocal_lattice/functions_reciprocal_lattice.jl")
 
 # construction of Brillouin zones
-include("reciprocal_lattice/construction_brillouin_zone.jl")
+include("reciprocal_lattice/functions_brillouin_zone.jl")
 
 
 # module end
