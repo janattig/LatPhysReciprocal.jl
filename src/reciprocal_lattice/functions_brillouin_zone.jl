@@ -66,6 +66,63 @@ function identicalPlanes(
     return pointOnPlane(p2, p1,n1, error_allowed) && parallelVectors(n1,n2)
 end
 
+# Find out if three planes (pi,ni) have one intersecting point
+function haveSingleIntersection(
+            p1 :: Vector{<:Real},
+            n1 :: Vector{<:Real},
+            p2 :: Vector{<:Real},
+            n2 :: Vector{<:Real},
+            p3 :: Vector{<:Real},
+            n3 :: Vector{<:Real},
+            error_allowed :: Real = 1e-15
+        ) :: Bool
+
+    # calculate the determinant
+    determinant = dot(n3, cross(n1, n2))
+    # check if they intersect in a point
+    if abs(determinant) < error_allowed
+        # there will not be a single point of intersection
+        return false
+    else
+        # they will intersect in one point
+        return true
+    end
+end
+
+# Get the intersecting point of three planes
+function getSingleIntersection(
+            p1 :: Vector{<:Real},
+            n1 :: Vector{<:Real},
+            p2 :: Vector{<:Real},
+            n2 :: Vector{<:Real},
+            p3 :: Vector{<:Real},
+            n3 :: Vector{<:Real},
+            error_allowed :: Real = 1e-15
+        ) :: Vector{Float64}
+
+    # calculate the main determinant
+    determinant = dot(n3, cross(n1, n2))
+
+    # calculate the other relevant determinants
+    D = Float64[-dot(n1,p1), -dot(n2,p2), -dot(n3,p3)]
+    det_x = det([
+        D[1] n1[2] n1[3]
+        D[2] n2[2] n2[3]
+        D[3] n3[2] n3[3]
+    ])
+    det_y = det([
+        n1[1] D[1] n1[3]
+        n2[1] D[2] n2[3]
+        n3[1] D[3] n3[3]
+    ])
+    det_z = det([
+        n1[1] n1[2] D[1]
+        n2[1] n2[2] D[2]
+        n3[1] n3[2] D[3]
+    ])
+    # get the interesection point
+    return [det_x, det_y, det_z] ./ determinant
+end
 
 
 
@@ -137,8 +194,6 @@ function computeBrillouinZoneConstructionLattice(
 end
 
 
-
-
 #-------------
 # CORNERS (from reciprocal lattice)
 #-------------
@@ -162,16 +217,18 @@ function computeBrillouinZoneCorners(
 
 
     ##########
-    # STEP 1 - Construct all mid points of all lattice sites as well as directions of normals
+    # STEP 1 - Construct all mid points of connections to all lattice sites as well as directions of plane normals
     ##########
 
     # list of mid points (achors of planes)
     mid_points = Vector{Float64}[
-        k.*0.5  for k in point.(sites(reciprocal_lattice)) if dot(k,k) > 1e-5
+        point(s).*0.5  for s in sites(reciprocal_lattice) if dot(point(s),point(s)) > 1e-5
     ]
 
     # list of normals of planes
-    normals = Vector{Float64}[m ./ dot(m,m) for m in mid_points]
+    normals = Vector{Float64}[
+        m ./ dot(m,m) for m in mid_points
+    ]
 
 
 
@@ -347,7 +404,6 @@ end
 
 
 
-
 #-------------
 # FACES (from corners)
 #-------------
@@ -468,7 +524,6 @@ end
 
 
 
-
 ################################################################################
 #
 #   COMPUTING BRILLOUIN ZONE OBJECTS
@@ -521,4 +576,5 @@ function getBrillouinZone(
         faces_BZ
     )
 end
+
 =#
