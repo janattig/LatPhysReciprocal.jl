@@ -34,6 +34,7 @@ module LatPhysReciprocal
 
 # used libraries
 using LatPhysBase
+using LatPhysLatticeConstruction
 using LinearAlgebra
 
 # imports (to overwrite functions)
