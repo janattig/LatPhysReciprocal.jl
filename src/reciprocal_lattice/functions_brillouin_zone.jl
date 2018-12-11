@@ -283,7 +283,7 @@ function getBrillouinZone(
     end
 
     # push the starting point into the loop to wrap up and make a closed line
-    push!(loop, loop[1])
+    #push!(loop, loop[1])
 
     # list of edges (only contains this one loop)
     faces_BZ = Vector{Int64}[loop]
@@ -310,7 +310,7 @@ end
 #
 ################################################################################
 
-# wrapper for 2d unitcells
+# wrapper for 2d reciprocal unitcells
 function getBrillouinZone(
             reciprocal_unitcell :: RU
             ;
@@ -320,6 +320,19 @@ function getBrillouinZone(
     # call the respective function
     return getBrillouinZone(BrillouinZone{RU}, reciprocal_unitcell; kwargs...)
 end
+
+# wrapper for 2d real space unitcells
+function getBrillouinZone(
+            unitcell :: U
+            ;
+            kwargs...
+        ) :: BrillouinZone{ReciprocalUnitcell{ReciprocalPoint{D},B}} where {L,D,S<:AbstractSite{L,D},B,U<:AbstractUnitcell{S,B}}
+
+    # call the respective function
+    return getBrillouinZone(BrillouinZone{ReciprocalUnitcell{ReciprocalPoint{D},B}}, getReciprocalUnitcell(unitcell); kwargs...)
+end
+
+
 
 # Export the function
 export getBrillouinZone

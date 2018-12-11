@@ -112,3 +112,118 @@ function getReciprocalPoint(
         "\\Gamma"
     )
 end
+
+
+
+
+
+
+
+#########################
+#
+#	K POINT (and K')
+#
+#########################
+
+# K point (Based on BZ object) in 2D
+function getReciprocalPoint(
+            :: Type{R},
+            unitcell   :: U,
+            identifier :: Val{:K},
+            instance   :: Val{I}
+        ) :: R where {D,I,N,LS,LB, R<:AbstractReciprocalPoint{2}, S<:AbstractSite{LS,2}, B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B}}
+
+    # get the bz
+    bz = getBrillouinZone(getReciprocalUnitcell(unitcell))
+
+    # return the specific type
+    return newReciprocalPoint(
+        R,
+        corners(bz)[faces(bz)[1][mod(I,length(corners(bz))) + 1]],
+        "K",
+        "K"
+    )
+end
+
+# K' point (Based on BZ object) in 2D
+function getReciprocalPoint(
+            :: Type{R},
+            unitcell   :: U,
+            identifier :: Val{:Kp},
+            instance   :: Val{I}
+        ) :: R where {D,I,N,LS,LB, R<:AbstractReciprocalPoint{2}, S<:AbstractSite{LS,2}, B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B}}
+
+    # get the bz
+    bz = getBrillouinZone(getReciprocalUnitcell(unitcell))
+
+    # return the specific type
+    return newReciprocalPoint(
+        R,
+        corners(bz)[faces(bz)[1][mod(I,length(corners(bz))) + 1]],
+        "K\'",
+        "K\'"
+    )
+end
+
+
+
+
+#########################
+#
+#	M POINT (and M')
+#
+#########################
+
+# M point (Based on BZ object) in 2D
+function getReciprocalPoint(
+            :: Type{R},
+            unitcell   :: U,
+            identifier :: Val{:M},
+            instance   :: Val{I}
+        ) :: R where {D,I,N,LS,LB, R<:AbstractReciprocalPoint{2}, S<:AbstractSite{LS,2}, B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B}}
+
+    # get the bz
+    bz = getBrillouinZone(getReciprocalUnitcell(unitcell))
+
+    # first and second index
+    i1 = faces(bz)[1][mod(I-1,length(corners(bz))) + 1]
+    i2 = faces(bz)[1][mod(I,length(corners(bz))) + 1]
+    # find the first and next corner
+    c1 = corners(bz)[i1]
+    c2 = corners(bz)[i2]
+
+    # return the specific type
+    return newReciprocalPoint(
+        R,
+        (c1.+c2)./2,
+        "M",
+        "M"
+    )
+end
+
+# M' point (Based on BZ object) in 2D
+function getReciprocalPoint(
+            :: Type{R},
+            unitcell   :: U,
+            identifier :: Val{:Mp},
+            instance   :: Val{I}
+        ) :: R where {D,I,N,LS,LB, R<:AbstractReciprocalPoint{2}, S<:AbstractSite{LS,2}, B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B}}
+
+    # get the bz
+    bz = getBrillouinZone(getReciprocalUnitcell(unitcell))
+
+    # first and second index
+    i1 = faces(bz)[1][mod(I,length(corners(bz))) + 1]
+    i2 = faces(bz)[1][mod(I+1,length(corners(bz))) + 1]
+    # find the first and next corner
+    c1 = corners(bz)[i1]
+    c2 = corners(bz)[i2]
+
+    # return the specific type
+    return newReciprocalPoint(
+        R,
+        (c1.+c2)./2,
+        "M\'",
+        "M\'"
+    )
+end
