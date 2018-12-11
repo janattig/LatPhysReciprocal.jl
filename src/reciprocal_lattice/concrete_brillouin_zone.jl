@@ -22,7 +22,7 @@
 #   ABSTRACT TYPE DEFINITION
 #
 ################################################################################
-mutable struct BrillouinZone{R}
+mutable struct BrillouinZone{R} <: AbstractBrillouinZone{R}
 
     # reciprocal unitcell
     reciprocal_unitcell :: R
