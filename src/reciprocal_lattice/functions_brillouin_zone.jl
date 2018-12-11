@@ -150,7 +150,7 @@ function getBrillouinZone(
     ##########
 
     # build a test lattice
-    reciprocal_lattice = getLatticeByBondDistance(reciprocal_unitcell, 2)
+    reciprocal_lattice = getLatticePeriodic(reciprocal_unitcell, 2)
 
     # find the minimal distance to a the Gamma point
     max_distance = maximum([dot(k,k) for k in point.(sites(reciprocal_lattice))])
@@ -317,7 +317,7 @@ function getBrillouinZone(
     ##########
 
     # build a test lattice
-    reciprocal_lattice = getLatticeByBondDistance(reciprocal_unitcell, 2)
+    reciprocal_lattice = getLatticePeriodic(reciprocal_unitcell, 2)
 
     # find the minimal distance to a the Gamma point
     max_distance = maximum([dot(k,k) for k in point.(sites(reciprocal_lattice))])
