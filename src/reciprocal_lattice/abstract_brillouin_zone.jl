@@ -146,3 +146,13 @@ end
 
 # export reciprocalUnitcell interface
 export reciprocalUnitcell, reciprocalUnitcell!
+
+
+
+
+# CUSTOM SHOW FUNCTION
+
+# single Brillouin Zone
+function show(io::IO, bz::BZ) where {P,B,RU<:AbstractReciprocalUnitcell{P,B},BZ<:AbstractBrillouinZone{RU}}
+    print(io, "Brillouin Zone object\n--> reciprocal unitcell type ", RU, "\n--> type ", BZ, "\n--> ", length(corners(bz)), " BZ corners\n--> ", length(faces(bz)), " BZ faces")
+end
