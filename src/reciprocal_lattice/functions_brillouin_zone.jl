@@ -575,7 +575,7 @@ function getBrillouinZone(
         # get the sorted
         loop_sorted = sort(loop)
         # push the starting point into the loop
-        push!(loop, loop[1])
+        #push!(loop, loop[1])
 
         # loop not found yet
         loop_found = false
