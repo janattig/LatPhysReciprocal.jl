@@ -45,11 +45,11 @@ end
 # N=?,D=?
 function getReciprocalUnitcell(
         unitcell :: U
-    ) :: ReciprocalUnitcell{ReciprocalPoint{D},Bond{Int64,N}} where {D,N,LS,LB,S<:AbstractSite{LS,D},B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B},
+    ) :: ReciprocalUnitcell{ReciprocalPoint{D},Bond{LB,N}} where {D,N,LS,LB,S<:AbstractSite{LS,D},B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B},
                   LBR,BR<:AbstractBond{LBR,N},P<:AbstractReciprocalPoint{D},R<:AbstractReciprocalUnitcell{P,BR}}
 
     # pass on to general interface
-    return getReciprocalUnitcell(ReciprocalUnitcell{ReciprocalPoint{D},Bond{Int64,N}}, unitcell)
+    return getReciprocalUnitcell(ReciprocalUnitcell{ReciprocalPoint{D},Bond{LB,N}}, unitcell)
 end
 
 
