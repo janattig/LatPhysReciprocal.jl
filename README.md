@@ -19,8 +19,14 @@ Definition of functions to construct all objects.
 
 ## Installation
 
-For usage purposes only, you can install the package via the package mode in Julia (Pkg). However, since the package
-is not listed in the Julia package repositories, you have to use
+You can install the package via the package mode in Julia (Pkg). However, since the package
+is not listed in the Julia package repositories, you have to first install the unregistered
+dependencies manually with
+```julia
+(v1.0) pkg> add "https://github.com/janattig/LatPhysBase.jl"
+(v1.0) pkg> add "https://github.com/janattig/LatPhysLatticeConstruction.jl"
+```
+to finally install the main package with
 ```julia
 (v1.0) pkg> add "https://github.com/janattig/LatPhysReciprocal.jl"
 ```
