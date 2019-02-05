@@ -159,7 +159,7 @@ function getReciprocalPoint(
     # return the specific type
     return newReciprocalPoint(
         R,
-        corners(bz)[faces(bz)[1][mod(I,length(corners(bz))) + 1]],
+        corners(bz)[faces(bz)[1][mod(I+1,length(corners(bz))) + 1]],
         "K\'",
         "K\'"
     )
