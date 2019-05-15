@@ -66,6 +66,8 @@ include("reciprocal_points/concrete_rec_point.jl")
 # Default definitions of various points
 include("reciprocal_points/default_points.jl")
 
+# Default definitions of various points
+include("reciprocal_points/k_space_points.jl")
 
 
 
