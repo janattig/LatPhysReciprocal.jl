@@ -19,10 +19,37 @@
 #   ABSTRACT TYPE DEFINITION
 #
 ################################################################################
-abstract type AbstractReciprocalPath{P <: AbstractReciprocalPoint{D} where {D}} end
+abstract type AbstractReciprocalPath{P <: AbstractReciprocalPoint{D} where {D}} <: AbstractArray{P,1} end
 
 # export the type
 export AbstractReciprocalPath
+
+
+
+
+
+# Array functionality for path type
+
+# Indexing
+function Base.IndexStyle(::Type{<:AbstractReciprocalPath})
+    return IndexLinear()
+end
+
+# size
+function Base.size(path::P) where {RP, P<:AbstractReciprocalPath{RP}}
+    return size(points(path))
+end
+
+# getindex
+function Base.getindex(path::P, i::Int64) where {RP, P<:AbstractReciprocalPath{RP}}
+    return getindex(points(path), i)
+end
+
+# setindex
+function Base.setindex!(path::P, v, i::Int64) where {RP, P<:AbstractReciprocalPath{RP}}
+    return setindex!(points(path), v, i)
+end
+
 
 
 
