@@ -227,3 +227,69 @@ function getReciprocalPoint(
         "M\'"
     )
 end
+
+#########################
+#
+#   P POINT in 3D (for hyperoctagon)
+#
+#########################
+
+function getReciprocalPoint(
+            :: Type{R},
+            unitcell   :: U,
+            identifier :: Val{:P},
+            instance   :: Val{I}
+        ) :: R where {I,N,LS,LB, R<:AbstractReciprocalPoint{3}, S<:AbstractSite{LS,3}, B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B}} ##should there be a D?
+
+    # return the specific type
+    return newReciprocalPoint(
+        R,
+        [pi, pi, pi],
+        "P",
+        "P"
+    )
+end
+
+#########################
+#
+#   NN POINT in 3D (for hyperoctagon)
+#
+#########################
+
+function getReciprocalPoint(
+            :: Type{R},
+            unitcell   :: U,
+            identifier :: Val{:NN},
+            instance   :: Val{I}
+        ) :: R where {I,N,LS,LB, R<:AbstractReciprocalPoint{3}, S<:AbstractSite{LS,3}, B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B}} ##should there be a D?
+
+    # return the specific type
+    return newReciprocalPoint(
+        R,
+        [pi, pi, 0.0],
+        "NN",
+        "NN"
+    )
+end
+
+#########################
+#
+#   H POINT in 3D (for hyperoctagon)
+#
+#########################
+
+function getReciprocalPoint(
+            :: Type{R},
+            unitcell   :: U,
+            identifier :: Val{:H},
+            instance   :: Val{I}
+        ) :: R where {I,N,LS,LB, R<:AbstractReciprocalPoint{3}, S<:AbstractSite{LS,3}, B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B}} ##should there be a D?
+
+    # return the specific type
+    return newReciprocalPoint(
+        R,
+        [0.0, (2*pi), 0.0],
+        "H",
+        "H"
+    )
+end
