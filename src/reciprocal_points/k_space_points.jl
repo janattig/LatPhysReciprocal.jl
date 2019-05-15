@@ -41,7 +41,17 @@ function getPointsOnLine(
     # return the array of points
     return line
 end
+function getPointsOnLine(
+            point1 :: P1,
+            point2 :: P2,
+            resolution :: Integer
+        ) :: Vector{Vector{Float64}} where {D,P1<:AbstractReciprocalPoint{D}, P2<:AbstractReciprocalPoint{D}}
+
+    # parse to k space points
+    return getPointsOnLine(point(point1), point(point2), resolution)
+end
 export getPointsOnLine
+
 
 # get random points inside a box
 function getPointsRandomInBox(
