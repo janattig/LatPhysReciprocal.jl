@@ -16,6 +16,15 @@ function getReciprocalPoint(
     # return the specific val typed function
     return getReciprocalPoint(R, unitcell, Val(identifier), Val(instance))
 end
+function getReciprocalPoint(
+            :: Type{R},
+            unitcell   :: U,
+            identifier :: Tuple{Symbol, Int64}
+        ) :: R where {D,N,LS,LB, R<:AbstractReciprocalPoint{D}, S<:AbstractSite{LS,D}, B<:AbstractBond{LB,N}, U<:AbstractUnitcell{S,B}}
+
+    # return the specific val typed function
+    return getReciprocalPoint(R, unitcell, Val(identifier[1]), Val(identifier[2]))
+end
 
 # interface for own concrete reciprocal point type
 function getReciprocalPoint(
@@ -179,7 +188,7 @@ function getReciprocalPoint(
     bz = getBrillouinZone(getReciprocalUnitcell(unitcell))
 
     # get the faceindex
-    faceindex = div(I, 10) + 1
+    faceindex = mod(div(I, 10)-1, length(faces(bz))) + 1
     face = faces(bz)[faceindex]
     # first and second index
     cornerindex = mod(I, 10)
@@ -206,7 +215,7 @@ function getReciprocalPoint(
     bz = getBrillouinZone(getReciprocalUnitcell(unitcell))
 
     # get the faceindex
-    faceindex = div(I, 10) + 1
+    faceindex = mod(div(I, 10)-1, length(faces(bz))) + 1
     face = faces(bz)[faceindex]
     # first and second index
     cornerindex = mod(I, 10)
@@ -300,7 +309,7 @@ function getReciprocalPoint(
     bz = getBrillouinZone(getReciprocalUnitcell(unitcell))
 
     # get the faceindex
-    faceindex = div(I, 10) + 1
+    faceindex = mod(div(I, 10)-1, length(faces(bz))) + 1
     face = faces(bz)[faceindex]
     # first and second index
     cornerindex = mod(I, 10)
@@ -331,7 +340,7 @@ function getReciprocalPoint(
     bz = getBrillouinZone(getReciprocalUnitcell(unitcell))
 
     # get the faceindex
-    faceindex = div(I, 10) + 1
+    faceindex = mod(div(I, 10)-1, length(faces(bz))) + 1
     face = faces(bz)[faceindex]
     # first and second index
     cornerindex = mod(I, 10)
@@ -374,7 +383,7 @@ function getReciprocalPoint(
     bz = getBrillouinZone(getReciprocalUnitcell(unitcell))
 
     # get the faceindex
-    faceindex = div(I, 10) + 1
+    faceindex = mod(I-1, length(faces(bz))) + 1
     face = faces(bz)[faceindex]
     # find the center
     center = [0.0, 0.0, 0.0]

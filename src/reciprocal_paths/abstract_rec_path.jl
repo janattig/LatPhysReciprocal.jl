@@ -219,6 +219,16 @@ function getReciprocalPath(
     return newReciprocalPath(RPA, [getReciprocalPoint(RPO, unitcell, p[1],p[2]) for p in points])
 end
 function getReciprocalPath(
+            ::Type{RPA},
+            unitcell :: U,
+            points :: Union{Symbol, Tuple{Symbol,Int64}} ...
+        ) :: RPA where {D,RPO<:AbstractReciprocalPoint{D}, RPA<:AbstractReciprocalPath{RPO},S,B,U<:AbstractUnitcell{S,B}}
+
+    # pass to the specific function
+    return newReciprocalPath(RPA, [getReciprocalPoint(RPO, unitcell, p) for p in points])
+end
+
+function getReciprocalPath(
             unitcell :: U,
             points :: Symbol ...
         ) :: ReciprocalPath{ReciprocalPoint{D}} where {LS,D,S<:AbstractSite{LS,D},B,U<:AbstractUnitcell{S,B}}
@@ -233,6 +243,14 @@ function getReciprocalPath(
 
     # pass to the specific function
     return newReciprocalPath(ReciprocalPath{ReciprocalPoint{D}}, [getReciprocalPoint(ReciprocalPoint{D}, unitcell, p[1],p[2]) for p in points])
+end
+function getReciprocalPath(
+            unitcell :: U,
+            points :: Union{Symbol, Tuple{Symbol,Int64}} ...
+        ) :: ReciprocalPath{ReciprocalPoint{D}} where {LS,D,S<:AbstractSite{LS,D},B,U<:AbstractUnitcell{S,B}}
+
+    # pass to the specific function
+    return newReciprocalPath(ReciprocalPath{ReciprocalPoint{D}}, [getReciprocalPoint(ReciprocalPoint{D}, unitcell, p) for p in points])
 end
 
 # export the reciprocal path
