@@ -349,3 +349,45 @@ function getReciprocalPoint(
         "M\'"
     )
 end
+
+
+
+
+
+
+
+#########################
+#
+#	X POINT (center of face)
+#
+#########################
+
+# X point (Based on BZ object) in 3D
+function getReciprocalPoint(
+            :: Type{R},
+            unitcell   :: U,
+            identifier :: Val{:X},
+            instance   :: Val{I}
+        ) :: R where {D,I,N,LS,LB, R<:AbstractReciprocalPoint{3}, S<:AbstractSite{LS,3}, B<:AbstractBond{LB,N},U<:AbstractUnitcell{S,B}}
+
+    # get the bz
+    bz = getBrillouinZone(getReciprocalUnitcell(unitcell))
+
+    # get the faceindex
+    faceindex = div(I, 10) + 1
+    face = faces(bz)[faceindex]
+    # find the center
+    center = [0.0, 0.0, 0.0]
+    for c in face
+        center .+= corners(bz)[c]
+    end
+    center ./= length(face)
+
+    # return the specific type
+    return newReciprocalPoint(
+        R,
+        center,
+        "X",
+        "X"
+    )
+end
