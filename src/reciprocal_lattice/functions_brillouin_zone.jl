@@ -687,13 +687,13 @@ function getPointsHighSymmetryMesh(
     for f in faces(bz)
 
         # obtain the relevant corners
-        corners = unique([corners(bz)[i] for i in f])
+        k_corners = unique([corners(bz)[i] for i in f])
         # points that connect to gamma
         points_to_gamma = Vector{Float64}[]
 
         # INCLUDE CORNER POINTS IN MESH
         if include_bz_corners
-            for c in corners
+            for c in k_corners
                 # put the corner into the mesh
                 push!(mesh, c)
                 # put the corner into the list of points that connect to the gamma point
@@ -704,52 +704,52 @@ function getPointsHighSymmetryMesh(
         # INCLUDE FACE CENTERS IN MESH
         if include_face_centers
             # push the center into the mesh
-            push!(mesh, getPointCenter(corners))
+            push!(mesh, getPointCenter(k_corners))
             # push the center into the list of connecting points
-            push!(points_to_gamma, getPointCenter(corners))
+            push!(points_to_gamma, getPointCenter(k_corners))
         end
 
         # INCLUDE EDGES IN MESH
         if include_bz_edges
             # the edge that wraps in the point list
-            line = getPointsOnLine(corners[end], corners[1], line_resolution)
+            line = getPointsOnLine(k_corners[end], k_corners[1], line_resolution)
             for p in line
                 # put the point into the mesh
                 push!(mesh, p)
             end
             # put the start, end and center of line into the gamma point connecting point list
-            push!(points_to_gamma, corners[end])
-            push!(points_to_gamma, corners[1])
-            push!(points_to_gamma, getPointCenter(corners[1], corners[end]))
+            push!(points_to_gamma, k_corners[end])
+            push!(points_to_gamma, k_corners[1])
+            push!(points_to_gamma, getPointCenter(k_corners[1], k_corners[end]))
             # all other edges
-            for i in 1:length(corners)-1
+            for i in 1:length(k_corners)-1
                 # construct line
-                line = getPointsOnLine(corners[i], corners[i+1], line_resolution)
+                line = getPointsOnLine(k_corners[i], k_corners[i+1], line_resolution)
                 for p in line
                     # put the point into the mesh
                     push!(mesh, p)
                 end
                 # put the start, end and center of line into the gamma point connecting point list
-                push!(points_to_gamma, corners[i])
-                push!(points_to_gamma, corners[i+1])
-                push!(points_to_gamma, getPointCenter(corners[i], corners[i+1]))
+                push!(points_to_gamma, k_corners[i])
+                push!(points_to_gamma, k_corners[i+1])
+                push!(points_to_gamma, getPointCenter(k_corners[i], k_corners[i+1]))
             end
         end
 
         # INCLUDE LINES IN THE FACE
         if include_lines_in_faces
             # iterate over all combination of points
-            for i in 1:length(corners)
-            for j in i+1:length(corners)
+            for i in 1:length(k_corners)
+            for j in i+1:length(k_corners)
                 # build the line from i to j
-                line = getPointsOnLine(corners[i], corners[j], line_resolution)
+                line = getPointsOnLine(k_corners[i], k_corners[j], line_resolution)
                 for p in line
                     push!(mesh, p)
                 end
                 # put the start, end and center of line into the gamma point connecting point list
-                push!(points_to_gamma, corners[i])
-                push!(points_to_gamma, corners[j])
-                push!(points_to_gamma, getPointCenter(corners[i], corners[j]))
+                push!(points_to_gamma, k_corners[i])
+                push!(points_to_gamma, k_corners[j])
+                push!(points_to_gamma, getPointCenter(k_corners[i], k_corners[j]))
             end
             end
         end
@@ -757,11 +757,11 @@ function getPointsHighSymmetryMesh(
         # INCLUDE LINES TO THE FACE CENTER
         if include_lines_to_face_center
             # build the face center
-            center = getPointCenter(corners)
+            center = getPointCenter(k_corners)
             # iterate over all points
-            for i in 1:length(corners)
+            for i in 1:length(k_corners)
                 # build the line from i to j
-                line = getPointsOnLine(corners[i], center, line_resolution)
+                line = getPointsOnLine(k_corners[i], center, line_resolution)
                 for p in line
                     push!(mesh, p)
                 end
@@ -786,7 +786,7 @@ function getPointsHighSymmetryMesh(
 
         # INCLUDE FACE POINTS RANDOMLY SAMPLED
         if include_random_face_points
-            points = getPointsRandomInConvexHull(face_resolution, corners...)
+            points = getPointsRandomInConvexHull(face_resolution, k_corners...)
             for p in points
                 push!(mesh, p)
             end
