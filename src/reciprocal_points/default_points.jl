@@ -13,6 +13,10 @@ function getReciprocalPoint(
             instance   :: Int64 = 1
         ) :: R where {D,N,LS,LB, R<:AbstractReciprocalPoint{D}, S<:AbstractSite{LS,D}, B<:AbstractBond{LB,N}, U<:AbstractUnitcell{S,B}}
 
+    # maybe instance is passed from another source in some notation as e.g. X_2
+    if instance == 1 && occursin('_', string(identifier))
+        return getReciprocalPoint(R, unitcell, Val(Symbol(split(string(identifier),'_')[1])), Val(Meta.eval(Meta.parse(split(string(identifier),'_')[2]))))
+    end
     # return the specific val typed function
     return getReciprocalPoint(R, unitcell, Val(identifier), Val(instance))
 end
@@ -33,6 +37,10 @@ function getReciprocalPoint(
             instance   :: Int64 = 1
         ) :: ReciprocalPoint{D} where {D,N,LS,LB, S<:AbstractSite{LS,D}, B<:AbstractBond{LB,N}, U<:AbstractUnitcell{S,B}}
 
+    # maybe instance is passed from another source in some notation as e.g. X_2
+    if instance == 1 && occursin('_', string(identifier))
+        return getReciprocalPoint(ReciprocalPoint{D}, unitcell, Val(Symbol(split(string(identifier),'_')[1])), Val(Meta.eval(Meta.parse(split(string(identifier),'_')[2]))))
+    end
     # return the specific val typed function
     return getReciprocalPoint(ReciprocalPoint{D}, unitcell, Val(identifier), Val(instance))
 end
