@@ -176,7 +176,7 @@ end
 
 
 
-# K point (Based on BZ object) in 2D
+# K point (Based on BZ object) in 3D
 function getReciprocalPoint(
             :: Type{R},
             unitcell   :: U,
@@ -188,7 +188,7 @@ function getReciprocalPoint(
     bz = getBrillouinZone(getReciprocalUnitcell(unitcell))
 
     # get the faceindex
-    faceindex = mod(div(I, 10)-1, length(faces(bz))) + 1
+    faceindex = mod(div(I, 10), length(faces(bz))) + 1
     face = faces(bz)[faceindex]
     # first and second index
     cornerindex = mod(I, 10)
@@ -203,7 +203,7 @@ function getReciprocalPoint(
     )
 end
 
-# K' point (Based on BZ object) in 2D
+# K' point (Based on BZ object) in 3D
 function getReciprocalPoint(
             :: Type{R},
             unitcell   :: U,
@@ -215,7 +215,7 @@ function getReciprocalPoint(
     bz = getBrillouinZone(getReciprocalUnitcell(unitcell))
 
     # get the faceindex
-    faceindex = mod(div(I, 10)-1, length(faces(bz))) + 1
+    faceindex = mod(div(I, 10), length(faces(bz))) + 1
     face = faces(bz)[faceindex]
     # first and second index
     cornerindex = mod(I, 10)
@@ -309,7 +309,7 @@ function getReciprocalPoint(
     bz = getBrillouinZone(getReciprocalUnitcell(unitcell))
 
     # get the faceindex
-    faceindex = mod(div(I, 10)-1, length(faces(bz))) + 1
+    faceindex = mod(div(I, 10), length(faces(bz))) + 1
     face = faces(bz)[faceindex]
     # first and second index
     cornerindex = mod(I, 10)
@@ -340,7 +340,7 @@ function getReciprocalPoint(
     bz = getBrillouinZone(getReciprocalUnitcell(unitcell))
 
     # get the faceindex
-    faceindex = mod(div(I, 10)-1, length(faces(bz))) + 1
+    faceindex = mod(div(I, 10), length(faces(bz))) + 1
     face = faces(bz)[faceindex]
     # first and second index
     cornerindex = mod(I, 10)
