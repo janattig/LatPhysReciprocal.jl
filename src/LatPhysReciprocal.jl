@@ -36,6 +36,7 @@ module LatPhysReciprocal
 using LatPhysBase
 using LatPhysLatticeConstruction
 using LinearAlgebra
+using HDF5
 
 # imports (to overwrite functions)
 import LatPhysBase.label

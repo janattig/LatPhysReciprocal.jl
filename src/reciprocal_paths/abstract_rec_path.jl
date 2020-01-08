@@ -110,6 +110,39 @@ export points, points!
 
 
 
+
+
+
+
+
+
+
+
+function saveReciprocalPath(
+        rp :: RPA,
+        fn :: AbstractString,
+        group :: AbstractString = "reciprocal_path"
+        ;
+        append :: Bool = false
+    ) where {D,RPO<:AbstractReciprocalPoint{D}, RPA<:AbstractReciprocalPath{RPO}}
+
+end
+
+function loadReciprocalPath(
+        ::Type{RPA},
+        fn :: AbstractString,
+        group :: AbstractString = "reciprocal_path"
+    ) where {D,RPO<:AbstractReciprocalPoint{D}, RPA<:AbstractReciprocalPath{RPO}}
+
+end
+
+# export access to points
+export saveReciprocalPath, loadReciprocalPath
+
+
+
+
+
 # some more beauty interface
 # builds on interface defined above but can also be overwritten
 
