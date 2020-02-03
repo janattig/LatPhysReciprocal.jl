@@ -373,7 +373,7 @@ function shiftToFirstBZ!(
             # get the offset from the neighbor wrap
             offset .= 0.0
             for j in 1:N
-                offset .+= latticeVectors(reci_unitcell)[j] * wrap(b)[j]
+                offset .+= latticeVectors(reci_unitcell)[j] .* wrap(b)[j]
             end
             # see if the distance is lowered and maybe shift
             if norm(k_shifted .+ offset) < current_distance
