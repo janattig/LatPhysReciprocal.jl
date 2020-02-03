@@ -356,10 +356,11 @@ function shiftToFirstBZ!(
         ) :: Vector{Float64} where {D,N,L,P<:AbstractReciprocalPoint{D},B<:AbstractBond{L,N},RU<:AbstractReciprocalUnitcell{P,B}}
 
     # find out the current distance to gamma point
-    current_distance = dot(k,k)
+    current_distance = norm(k)
 
     # create a shifted k vector
     k_shifted = k
+    offset    = copy(k)
 
     # boolean indicating if the point was relocated in the last iteration
     relocated = true
@@ -370,15 +371,16 @@ function shiftToFirstBZ!(
         # iterate over all neighbors and try to shift the point
         for b in bonds(reci_unitcell)
             # get the offset from the neighbor wrap
-            offset = Float64[
-                sum([latticeVectors(reci_unitcell)[j][i] * wrap(b)[j] for j in 1:N])  for i in 1:D
-            ]
+            offset .= 0.0
+            for j in 1:N
+                offset .+= latticeVectors(reci_unitcell)[j] * wrap(b)[j]
+            end
             # see if the distance is lowered and maybe shift
-            if dot(k_shifted .+ offset, k_shifted .+ offset) < current_distance
+            if norm(k_shifted .+ offset) < current_distance
                 # shift the point
                 k_shifted .+= offset
                 # set the current distance correctly
-                current_distance = dot(k_shifted,k_shifted)
+                current_distance = norm(k_shifted)
                 # denote as relocated
                 relocated = true
             end
@@ -388,6 +390,5 @@ function shiftToFirstBZ!(
     # return the final shifted lattice vector
     return k_shifted
 end
-
 # export the test
 export shiftToFirstBZ, shiftToFirstBZ!
